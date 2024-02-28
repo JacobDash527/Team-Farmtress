@@ -16,7 +16,7 @@ arrow_frame_list = []
 frame = 0
 
 clock = pygame.time.Clock()
-button = classes.Button(420, 69, bread_monster)
+button = classes.Button(420, 60, bread_monster)
 
 run = True
 
