@@ -1,0 +1,44 @@
+import pygame
+import time
+import classes
+
+pygame.init()
+
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption('FNAP')
+bread_monster = pygame.transform.scale(pygame.image.load("images/bread_monster.png"), (100, 100))
+bg = pygame.image.load("images/bg.png")
+arrow_sheet = classes.SpriteSheet(pygame.image.load("sprite_sheets/arrow_sheet.png"))
+arrow_frame_list = []
+frame = 0
+
+clock = pygame.time.Clock()
+button = classes.Button(420, 69, bread_monster)
+
+run = True
+
+while run:
+  clock.tick(10)
+
+  button.draw()
+
+  screen.blit(arrow_sheet.get_image(frame, 15, 23, 10), (0, 0))
+
+  if button.colliding(pygame.mouse.get_pos()) == True:
+    print("whomp whomp")
+
+  for event in pygame.event.get():
+    if event == pygame.QUIT:
+      run = False
+
+  pygame.display.update()
+
+  if frame >= 9:
+    frame = 0
+  else:
+    frame += 1
+
+pygame.quit()
