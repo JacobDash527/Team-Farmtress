@@ -4,6 +4,7 @@ SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+
 class Button():
     def __init__(self, x, y, image, scale):
         self.clicked = False
@@ -13,15 +14,20 @@ class Button():
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
         self.screen = screen
+        self.enabled = True
 
-    def draw(self, x, y):
-        screen.blit(self.image, (x, y))
+    def draw(self, x, y, scale, greyscale):
+        draw_image = pygame.transform.scale(self.image, (self.image.get_width() * scale, self.image.get_height() * scale))
+        if greyscale:
+            draw_image = pygame.transform.grayscale(draw_image)
+        screen.blit(draw_image, (x, y))
 
     def is_clicked(self):
         if self.rect.collidepoint(pygame.mouse.get_pos()):
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
                 self.clicked = True
-                return(True)
+                if self.enabled == True: 
+                    return(True)
         if pygame.mouse.get_pressed()[0] == 0:
             self.clicked = False
 
@@ -35,6 +41,7 @@ class Button():
 class SpriteSheet():
     def __init__(self, image):
         self.sheet = image
+    
     def get_image(self, frame, width, height, scale, colour):
         image = pygame.Surface((width, height))
         image.blit(self.sheet, (0, 0), ((frame * width), 0, width, height))
