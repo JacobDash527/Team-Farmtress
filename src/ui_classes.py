@@ -5,35 +5,38 @@ SCREEN_HEIGHT = 600
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+def get_image(image):
+    return(pygame.transform.scale(pygame.image.load(image[0]), (image[1], image[2])))
+
 class Button():
     def __init__(self, x, y, image, scale):
         self.clicked = False
         self.x = x
         self.y = y
-        self.image = pygame.transform.scale(image, (image.get_width() * scale, image.get_height() * scale))
-        self.rect = self.image.get_rect()
+        self.image = image
+        self.rect = get_image(self.image).get_rect()
         self.rect.topleft = (x, y)
-        self.screen = screen
         self.enabled = True
 
     def draw(self, x, y, scale, greyscale):
-        draw_image = pygame.transform.scale(self.image, (self.image.get_width() * scale, self.image.get_height() * scale))
+        draw_image = pygame.transform.scale(get_image(self.image), (get_image(self.image).get_width() * scale, get_image(self.image).get_height() * scale))
         if greyscale:
             draw_image = pygame.transform.grayscale(draw_image)
         screen.blit(draw_image, (x, y))
+        pass
 
     def is_clicked(self):
         if self.rect.collidepoint(pygame.mouse.get_pos()):
             if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
                 self.clicked = True
-                if self.enabled == True: 
+                if self.enabled == True:
                     return(True)
         if pygame.mouse.get_pressed()[0] == 0:
             self.clicked = False
 
     def colliding(self, pos):
         x, y = pos
-        if self.x < x < (self.x + self.image.get_width()) and self.y < y < (self.y + self.image.get_height()):
+        if self.x < x < (self.x + get_image(self.image).get_width()) and self.y < y < (self.y + get_image(self.image).get_height()):
             return True
         else:
             pass
@@ -74,3 +77,7 @@ class SideMenus():
             screen.blit(self.open_sprite, (548, self.y))
         elif self.open == False:
             screen.blit(self.closed_sprite, (548, self.y))
+
+class Test():
+    def __init__(self):
+        pass
