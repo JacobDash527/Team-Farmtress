@@ -29,7 +29,7 @@ plots_default.append([[4, 0, 'null', 'null', False], [4, 1, 'null', 'null', Fals
 
 breads = ["Plain Bread: $5", "Bread Monster: $30", "Bread Crab: $10", "Baba Ganoush: $500"]
 inventory = {"money":20, "plain_bread":4, "bread_monster":3, "bread_crab":0, "baba_ganoush": 100}
-inventory_default = {"money":500, "plain_bread":1, "bread_monster":0, "bread_crab":0, "baba_ganoush": 0}
+inventory_default = {"money":0, "plain_bread":1, "bread_monster":0, "bread_crab":0, "baba_ganoush": 0}
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.RESIZABLE)
 pygame.display.set_caption('Team Farmtress')
